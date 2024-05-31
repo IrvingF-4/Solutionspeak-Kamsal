@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Kamsal</title>
+    <link rel="icon" href="../../static/logo.jpeg"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div th:insert="~{common/header}"></div>
+<div th:if="${message}">
+    <p th:text="${message}"></p>
+</div>
+
+<div class="row">
+    <div class="col-md-4" th:each="part : ${parts}">
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${part.name}">Nombre de la pieza</h5>
+                <p class="card-text">Detalles de la pieza</p>
+                <p class="card-text" th:text="${part.getDescription()}"></p>
+                <p class="card-text">Taller: <span th:text="${part.getWorkshopDTO().getName()}">Nombre del taller</span>
+                </p>
+                <div th:if="${esForeman}">
+                    <button class="btn btn-outline-primary">Enviar Mensaje</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:insert="~{common/footer}"></div>
+</body>
+</html>

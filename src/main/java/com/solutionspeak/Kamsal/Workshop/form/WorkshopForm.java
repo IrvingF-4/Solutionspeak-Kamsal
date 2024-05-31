@@ -24,7 +24,7 @@ public class WorkshopForm implements Serializable {
     @Email
     private final String email;
 
-    @Digits(integer = 0, fraction = 0)
     @Positive
     private final int userId;
+
 }

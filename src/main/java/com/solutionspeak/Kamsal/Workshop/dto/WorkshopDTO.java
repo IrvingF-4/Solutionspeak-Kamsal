@@ -10,19 +10,19 @@ import java.io.Serializable;
 @Builder
 public class WorkshopDTO implements Serializable {
 
-    private final int id;
+    private int id;
 
-    private final String name;
+    private String name;
 
-    private final String address;
+    private String address;
 
-    private final String contact;
+    private String contact;
 
-    private final String email;
+    private String email;
 
-    private final int userId;
+    private int userId;
 
-    private final UserDTO user;
+    private UserDTO user;
 
     public static WorkshopDTO build(final Workshop workshop) {
         return WorkshopDTO.builder()
@@ -30,6 +30,7 @@ public class WorkshopDTO implements Serializable {
                 .name(workshop.getName())
                 .address(workshop.getAddress())
                 .contact(workshop.getContact())
+                .email(workshop.getEmail())
                 .userId(workshop.getUserId())
                 .build();
     }
@@ -40,6 +41,7 @@ public class WorkshopDTO implements Serializable {
                 .name(workshop.getName())
                 .address(workshop.getAddress())
                 .contact(workshop.getContact())
+                .email(workshop.getEmail())
                 .userId(workshop.getUserId())
                 .user(user)
                 .build();

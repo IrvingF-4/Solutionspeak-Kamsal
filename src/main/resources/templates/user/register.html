@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Usuarios</title>
+    <link rel="icon" href="../../static/logo.jpeg"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div th:insert="~{common/header}"></div>
+<div class="container mt-5">
+    <h1 class="mb-4">Registro de Usuarios</h1>
+
+    <form action="/user/" method="post">
+        <div class="form-group">
+            <label for="username">Nombre de usuario:</label>
+            <input type="text" class="form-control" id="username" name="username" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Correo electrónico:</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="phone">Teléfono:</label>
+            <input type="tel" class="form-control" id="phone" name="phone" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Contraseña:</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+        </div>
+        <div class="form-group">
+            <label for="role">Rol:</label>
+            <select class="form-control" id="role" name="role">
+                <option value="Workshop_Foreman">Jefe de taller</option>
+                <option value="Visitor">Visitante</option>
+                <option value="Administrator">Administrador</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Registrarse</button>
+    </form>
+</div>
+<div th:insert="~{common/footer}"></div>
+</body>
+</html>

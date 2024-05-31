@@ -1,0 +1,31 @@
+<!-- Botón para abrir el modal de eliminación -->
+<td>
+    <button type="button" class="btn btn-danger" data-toggle="modal"
+            th:attr="data-target='#deleteModal'+${workshop.id}">
+        <i class="fas fa-trash"></i>
+    </button>
+</td>
+
+<!-- Modal de eliminación -->
+<div class="modal fade" th:id="'deleteModal'+${workshop.id}" tabindex="-1" role="dialog"
+     aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Eliminar elemento</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p th:text="'Estas seguro que deseas borrar el Taller: ' + ${workshop.name}"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <form th:action="@{/workshop/delete/{id}(id=${workshop.id})}" method="post">
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

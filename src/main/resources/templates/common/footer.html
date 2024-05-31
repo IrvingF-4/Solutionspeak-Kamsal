@@ -1,0 +1,58 @@
+<footer class="bg-dark text-white py-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Taller Mecánico Kamsal</h4>
+                <p>Dirección: Colon Oriente 1444, Norte 26, Orizaba Veracruz</p>
+                <p>Teléfono: 272 724 8091</p>
+                <p>Correo: gerenciaadministravtiva@kamsal.com</p>
+                <!-- Otros detalles de la empresa -->
+            </div>
+            <div class="col-md-4">
+                <h4>Enlaces</h4>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/part/parts}">Piezas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/workshop/workshop}">Talleres</a>
+                    </li>
+                    <div th:if="${isLogged}">
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/logout}">Cerrar Sesión</a>
+                        </li>
+                    </div>
+                    <div class="container" th:unless="${isLogged}">
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/user/register}">Registrarse</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/user/login}">Iniciar Sesión</a>
+                        </li>
+                    </div>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h4>Creadores de la página</h4>
+                <p>SolutionSpeak</p>
+                <p>Visita nuestro sitio web para más información.</p>
+                <!-- Otros detalles de los creadores de la página -->
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('.nav-link').click(function () {
+            $('.nav-item').removeClass('active');
+            $(this).parent().addClass('active');
+        });
+    });
+</script>

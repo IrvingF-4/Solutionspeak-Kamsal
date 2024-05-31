@@ -48,6 +48,12 @@ public class UserService {
         userRepository.deleteById(userId);
     }
 
+    public UserDTO loginUser(final String email, final String password) throws Exception {
+        validateIfEmailAndPasswordExist(email, password);
+        final User user = userRepository.getUserByEmailAndPassword(email, password);
+        return UserDTO.build(user);
+    }
+
     public Map<Integer, UserDTO> getUserByIds(final List<Integer> usersId) {
         final List<User> users = userRepository.findAllById(usersId);
         return userDTOs(users);
@@ -56,6 +62,12 @@ public class UserService {
     public void validateIfUserExist(final int userId) throws Exception {
         if (!userRepository.existsById(userId)) {
             throw new Exception("No se ha encontrado el usuario con el ID: " + userId);
+        }
+    }
+
+    public void validateIfEmailAndPasswordExist(String email, String password) throws Exception {
+        if (!userRepository.existsByEmailAndPassword(email, password)) {
+            throw new Exception("No se ha encontrado el usuario");
         }
     }
 

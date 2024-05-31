@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Partes</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="icon" href="../../static/logo.jpeg"/>
+</head>
+<body>
+<div th:insert="~{common/header}"></div>
+<div class="container">
+    <h1>Listado de Piezas</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Categoría</th>
+            <th>Precio</th>
+            <th>Estado</th>
+            <th>Nombre del taller</th>
+            <div th:if="${esForeman}">
+                <th>Editar</th>
+                <th>Borrar</th>
+            </div>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Itera sobre las piezas y muestra sus atributos -->
+        <tr th:each="part : ${parts}">
+            <td th:text="${part.name}"></td>
+            <td th:text="${part.description}"></td>
+            <td th:text="${part.category}"></td>
+            <td th:text="${part.price}"></td>
+            <td th:text="${part.status}"></td>
+            <td th:text="${part.getWorkshopDTO().getName()}"></td>
+            <div th:if="${esForeman}">
+                <div class="text-right mb-3">
+                    <div th:insert="~{part/editModal}"></div>
+                    <div th:insert="~{part/deletePart}"></div>
+                </div>
+            </div>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Botón para agregar una nueva pieza -->
+    <div th:if="${esForeman}">
+        <div class="text-right mb-3">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#agregarPiezaModal">
+                Agregar Nueva Pieza
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para agregar una nueva pieza -->
+<div class="modal fade" id="agregarPiezaModal" tabindex="-1" role="dialog" aria-labelledby="agregarPiezaModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="agregarPiezaModalLabel">Agregar Nueva Pieza</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Formulario para agregar una nueva pieza -->
+                <form action="/part/register" method="post">
+                    <div class="form-group">
+                        <label for="name">Nombre</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Descripción</label>
+                        <input type="text" class="form-control" id="description" name="description">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Categoria</label>
+                        <input type="text" class="form-control" id="category" name="category">
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Precio</label>
+                        <input type="number" class="form-control" id="price" name="price" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="status">Estado:</label>
+                        <select class="form-control" id="status" name="status">
+                            <option value="NEW">Nuevo</option>
+                            <option value="LIGHTLY_USED">Ligeramente usado</option>
+                            <option value="USED">Usado</option>
+                            <option value="BROKEN">Roto</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="workshopSelect">Selecciona un taller:</label>
+                        <select class="form-control" id="workshopSelect" name="workshopId">
+                            <option th:each="workshop : ${workshops}" th:value="${workshop.id}"
+                                    th:text="${workshop.name}"></option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<div th:insert="~{common/footer}"></div>
+</body>
+</html>

@@ -17,7 +17,6 @@ public class UserForm implements Serializable {
 
     @Size(max = 100)
     @NotBlank
-    @UniqueElements
     private String email;
 
     @NumberFormat(pattern = "/^\\d{10}$/\n")
@@ -27,4 +26,7 @@ public class UserForm implements Serializable {
     private String password;
 
     private Role role;
+
+    public void setId(final int id){
+    }
 }

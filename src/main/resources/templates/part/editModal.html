@@ -1,0 +1,68 @@
+<td>
+    <!-- Botón para abrir el modal de edición -->
+    <button type="button" class="btn btn-primary" data-toggle="modal"
+            th:attr="data-target='#editModal'+${part.id}">
+        <i class="fas fa-edit"></i>
+    </button>
+</td>
+
+<!-- Modal de edición -->
+<div class="modal fade" th:id="'editModal'+${part.id}" tabindex="-1" role="dialog"
+     aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">Editar Parte</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Aquí puedes poner el formulario de edición -->
+                <form th:action="@{/part/update/{id}(id=${part.id})}" method="post">
+                    <div class="form-group">
+                        <label for="name">Nombre</label>
+                        <input type="text" class="form-control" id="name" name="name"
+                               th:value="${part.name}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Descripción</label>
+                        <input type="text" class="form-control" id="description" name="description"
+                               th:value="${part.description}">
+                    </div>
+                    <div class="form-group">
+                        <label for="category">Categoría</label>
+                        <input type="text" class="form-control" id="category" name="category"
+                               th:value="${part.category}">
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Precio</label>
+                        <input type="number" class="form-control" id="price" name="price" step="0.01"
+                               th:value="${part.price}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="status">Estado:</label>
+                        <select class="form-control" id="status" name="status" th:value="${part.status}">
+                            <option value="NEW">Nuevo</option>
+                            <option value="LIGHTLY_USED">Ligeramente usado</option>
+                            <option value="USED">Usado</option>
+                            <option value="BROKEN">Roto</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="workshopSelect">Selecciona un taller:</label>
+                        <select class="form-control" id="workshopSelect" name="workshopId"
+                                th:value="${part.workshopId}">
+                            <option th:each="workshop : ${workshops}" th:value="${workshop.id}"
+                                    th:text="${workshop.name}"></option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
